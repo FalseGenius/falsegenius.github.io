@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio</title>
+
+<style>
+:root{
+ --sepia:#f4ecd8;
+ --block:#2f2a24;
+ --text:#f5f1e6;
+ --muted:#cfc7b3;
+ --accent:#c2a878;
+ --matrix:rgba(40,120,40,0.18);
+}
+
+*{
+ box-sizing:border-box;
+ margin:0;
+ padding:0;
+ font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+body{
+ background:var(--sepia);
+ overflow-x:hidden;
+ padding:60px 20px;
+}
+
+/* MATRIX BACKGROUND */
+.matrix{
+ position:fixed;
+ top:0;
+ left:0;
+ width:100%;
+ height:100%;
+ pointer-events:none;
+ z-index:0;
+ opacity:0.45;
+}
+
+.column{
+ position:absolute;
+ top:-100%;
+ color:var(--matrix);
+ font-size:14px;
+ white-space:pre;
+ animation:fall linear infinite;
+ text-shadow:0 0 3px rgba(0,0,0,0.15);
+}
+
+@keyframes fall{
+ from{ transform:translateY(-100%); }
+ to{ transform:translateY(200vh); }
+}
+
+/* CARD */
+.card{
+ position:relative;
+ z-index:1;
+ max-width:900px;
+ margin:auto;
+ background:var(--block);
+ color:var(--text);
+ padding:40px;
+ border-radius:14px;
+ box-shadow:0 25px 60px rgba(0,0,0,0.3);
+ backdrop-filter:blur(3px);
+}
+
+/* TERMINAL BOOT */
+.boot{
+ color:var(--accent);
+ margin-bottom:25px;
+ font-size:14px;
+ white-space:pre-line;
+}
+
+h1{
+ font-size:2.2rem;
+ margin-bottom:20px;
+ color:var(--accent);
+}
+
+h2{
+ font-size:1.3rem;
+ margin-top:30px;
+ margin-bottom:12px;
+ border-left:4px solid var(--accent);
+ padding-left:10px;
+}
+
+p{
+ color:var(--muted);
+ margin-bottom:16px;
+}
+
+table{
+ width:100%;
+ border-collapse:collapse;
+ margin-top:10px;
+ font-size:0.9rem;
+}
+
+th,td{
+ text-align:left;
+ padding:10px 12px;
+ border-bottom:1px solid #4a433a;
+}
+
+th{
+ color:var(--accent);
+ background:#26221d;
+}
+
+tr{
+ transition:all .2s ease;
+}
+
+tr:hover{
+ background:#26221d;
+ box-shadow: inset 0 0 10px rgba(194,168,120,0.2);
+}
+
+a{
+ color:var(--accent);
+ text-decoration:none;
+}
+
+.footer-link{
+ margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="matrix" id="matrix"></div>
+
+<div class="card">
+
+<div class="boot" id="boot"></div>
+
+<h1>Portfolio</h1>
+
+<h2>Public contests</h2>
+
+<p><strong>Notable placements:</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Contest Name</th>
+<th>Platform</th>
+<th>Placement</th>
+<th>Findings</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://audits.sherlock.xyz/contests/1176">Summer.fi - governance v2</a></td>
+<td>Sherlock</td>
+<td>7</td>
+<td>1 Medium</td>
+<td>Staking/Vesting & cross-chain Governance</td>
+</tr>
+<tr>
+<td><a href="https://audits.sherlock.xyz/contests/968">Superfluid Locker System</a></td>
+<td>Sherlock</td>
+<td>9</td>
+<td>1 High</td>
+<td>Rewards & Yield</td>
+</tr>
+<tr>
+<td><a href="https://audits.sherlock.xyz/contests/799">Aegis.im YUSD</a></td>
+<td>Sherlock</td>
+<td>4</td>
+<td>1 High</td>
+<td>Rewards & Yield</td>
+</tr>
+<tr>
+<td><a href="https://code4rena.com/audits/2025-04-kinetiq">Kinetiq</a></td>
+<td>Code4rena</td>
+<td>14</td>
+<td>1 High / 1 Medium</td>
+<td>LST on Hyperliquid</td>
+</tr>
+<tr>
+<td><a href="https://audits.sherlock.xyz/contests/755">Crestal Network</a></td>
+<td>Sherlock</td>
+<td>10</td>
+<td>1 High / 1 Medium</td>
+<td>AI agent network</td>
+</tr>
+</tbody>
+</table>
+
+<div class="footer-link">
+<strong>Full audit profile:</strong>
+<a href="https://audits.sherlock.xyz/watson/FalseGenius">https://audits.sherlock.xyz/watson/FalseGenius</a>
+</div>
+
+</div>
+
+<script>
+/* MATRIX GENERATOR */
+const matrix=document.getElementById('matrix');
+const columns=Math.floor(window.innerWidth/18);
+
+for(let i=0;i<columns;i++){
+ const col=document.createElement('div');
+ col.className='column';
+ col.style.left=(i*18)+'px';
+ col.style.animationDuration=(8+Math.random()*12)+'s';
+
+ let text='';
+ for(let j=0;j<100;j++){
+  text+=Math.random()>0.5?'1':'0';
+  text+='\n';
+ }
+ col.textContent=text;
+ matrix.appendChild(col);
+}
+
+/* TERMINAL BOOT SEQUENCE */
+const bootLines=[
+ "[boot] loading auditor profile...",
+ "[boot] initializing contest database...",
+ "[boot] syncing findings...",
+ "[boot] establishing secure channel...",
+ "[ok] portfolio loaded"
+];
+
+const bootEl=document.getElementById('boot');
+let i=0;
+
+function typeLine(){
+ if(i>=bootLines.length) return;
+ bootEl.textContent+=bootLines[i]+"\n";
+ i++;
+ setTimeout(typeLine,400);
+}
+
+typeLine();
+</script>
+
+</body>
+</html>
