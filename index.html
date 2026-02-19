@@ -25,7 +25,7 @@
 body{
  background:var(--sepia);
  overflow-x:hidden;
- padding:60px 20px;
+ padding:clamp(30px,6vw,60px) 16px;
 }
 
 /* MATRIX BACKGROUND */
@@ -44,7 +44,7 @@ body{
  position:absolute;
  top:-100%;
  color:var(--matrix);
- font-size:14px;
+ font-size:clamp(10px,1.5vw,14px);
  white-space:pre;
  animation:fall linear infinite;
  text-shadow:0 0 3px rgba(0,0,0,0.15);
@@ -60,10 +60,11 @@ body{
  position:relative;
  z-index:1;
  max-width:900px;
+ width:100%;
  margin:auto;
  background:var(--block);
  color:var(--text);
- padding:40px;
+ padding:clamp(20px,4vw,40px);
  border-radius:14px;
  box-shadow:0 25px 60px rgba(0,0,0,0.3);
  backdrop-filter:blur(3px);
@@ -73,18 +74,18 @@ body{
 .boot{
  color:var(--accent);
  margin-bottom:25px;
- font-size:14px;
+ font-size:clamp(12px,2.5vw,14px);
  white-space:pre-line;
 }
 
 h1{
- font-size:2.2rem;
+ font-size:clamp(1.6rem,5vw,2.2rem);
  margin-bottom:20px;
  color:var(--accent);
 }
 
 h2{
- font-size:1.3rem;
+ font-size:clamp(1.1rem,3.5vw,1.3rem);
  margin-top:30px;
  margin-bottom:12px;
  border-left:4px solid var(--accent);
@@ -94,13 +95,20 @@ h2{
 p{
  color:var(--muted);
  margin-bottom:16px;
+ font-size:clamp(0.85rem,2.5vw,1rem);
+}
+
+/* TABLE */
+.table-wrapper{
+ width:100%;
+ overflow-x:auto;
 }
 
 table{
  width:100%;
  border-collapse:collapse;
  margin-top:10px;
- font-size:0.9rem;
+ font-size:clamp(0.8rem,2.5vw,0.9rem);
 }
 
 th,td{
@@ -126,10 +134,45 @@ tr:hover{
 a{
  color:var(--accent);
  text-decoration:none;
+ word-break:break-word;
 }
 
 .footer-link{
  margin-top:30px;
+}
+
+/* PREMIUM MOBILE STACK */
+@media (max-width:768px){
+
+ table thead{
+  display:none;
+ }
+
+ table, tbody, tr, td{
+  display:block;
+  width:100%;
+ }
+
+ tr{
+  margin-bottom:18px;
+  padding:16px;
+  background:#26221d;
+  border-radius:10px;
+ }
+
+ td{
+  border:none;
+  padding:6px 0;
+ }
+
+ td::before{
+  content:attr(data-label);
+  display:block;
+  font-weight:bold;
+  color:var(--accent);
+  margin-bottom:4px;
+ }
+
 }
 </style>
 </head>
@@ -148,6 +191,7 @@ a{
 
 <p><strong>Notable placements:</strong></p>
 
+<div class="table-wrapper">
 <table>
 <thead>
 <tr>
@@ -160,42 +204,43 @@ a{
 </thead>
 <tbody>
 <tr>
-<td><a href="https://audits.sherlock.xyz/contests/1176">Summer.fi - governance v2</a></td>
-<td>Sherlock</td>
-<td>7</td>
-<td>1 Medium</td>
-<td>Staking/Vesting & cross-chain Governance</td>
+<td data-label="Contest Name"><a href="https://audits.sherlock.xyz/contests/1176">Summer.fi - governance v2</a></td>
+<td data-label="Platform">Sherlock</td>
+<td data-label="Placement">7</td>
+<td data-label="Findings">1 Medium</td>
+<td data-label="Type">Staking/Vesting & cross-chain Governance</td>
 </tr>
 <tr>
-<td><a href="https://audits.sherlock.xyz/contests/968">Superfluid Locker System</a></td>
-<td>Sherlock</td>
-<td>9</td>
-<td>1 High</td>
-<td>Rewards & Yield</td>
+<td data-label="Contest Name"><a href="https://audits.sherlock.xyz/contests/968">Superfluid Locker System</a></td>
+<td data-label="Platform">Sherlock</td>
+<td data-label="Placement">9</td>
+<td data-label="Findings">1 High</td>
+<td data-label="Type">Rewards & Yield</td>
 </tr>
 <tr>
-<td><a href="https://audits.sherlock.xyz/contests/799">Aegis.im YUSD</a></td>
-<td>Sherlock</td>
-<td>4</td>
-<td>1 High</td>
-<td>Rewards & Yield</td>
+<td data-label="Contest Name"><a href="https://audits.sherlock.xyz/contests/799">Aegis.im YUSD</a></td>
+<td data-label="Platform">Sherlock</td>
+<td data-label="Placement">4</td>
+<td data-label="Findings">1 High</td>
+<td data-label="Type">Rewards & Yield</td>
 </tr>
 <tr>
-<td><a href="https://code4rena.com/audits/2025-04-kinetiq">Kinetiq</a></td>
-<td>Code4rena</td>
-<td>14</td>
-<td>1 High / 1 Medium</td>
-<td>LST on Hyperliquid</td>
+<td data-label="Contest Name"><a href="https://code4rena.com/audits/2025-04-kinetiq">Kinetiq</a></td>
+<td data-label="Platform">Code4rena</td>
+<td data-label="Placement">14</td>
+<td data-label="Findings">1 High / 1 Medium</td>
+<td data-label="Type">LST on Hyperliquid</td>
 </tr>
 <tr>
-<td><a href="https://audits.sherlock.xyz/contests/755">Crestal Network</a></td>
-<td>Sherlock</td>
-<td>10</td>
-<td>1 High / 1 Medium</td>
-<td>AI agent network</td>
+<td data-label="Contest Name"><a href="https://audits.sherlock.xyz/contests/755">Crestal Network</a></td>
+<td data-label="Platform">Sherlock</td>
+<td data-label="Placement">10</td>
+<td data-label="Findings">1 High / 1 Medium</td>
+<td data-label="Type">AI agent network</td>
 </tr>
 </tbody>
 </table>
+</div>
 
 <div class="footer-link">
 <strong>Full audit profile:</strong>
@@ -205,24 +250,32 @@ a{
 </div>
 
 <script>
-/* MATRIX GENERATOR */
+/* RESPONSIVE MATRIX GENERATOR */
 const matrix=document.getElementById('matrix');
-const columns=Math.floor(window.innerWidth/18);
 
-for(let i=0;i<columns;i++){
- const col=document.createElement('div');
- col.className='column';
- col.style.left=(i*18)+'px';
- col.style.animationDuration=(8+Math.random()*12)+'s';
+function generateMatrix(){
+ matrix.innerHTML="";
+ const columnWidth=18;
+ const columns=Math.floor(window.innerWidth/columnWidth);
 
- let text='';
- for(let j=0;j<100;j++){
-  text+=Math.random()>0.5?'1':'0';
-  text+='\n';
+ for(let i=0;i<columns;i++){
+  const col=document.createElement('div');
+  col.className='column';
+  col.style.left=(i*columnWidth)+'px';
+  col.style.animationDuration=(8+Math.random()*12)+'s';
+
+  let text='';
+  for(let j=0;j<100;j++){
+   text+=Math.random()>0.5?'1':'0';
+   text+='\n';
+  }
+  col.textContent=text;
+  matrix.appendChild(col);
  }
- col.textContent=text;
- matrix.appendChild(col);
 }
+
+generateMatrix();
+window.addEventListener('resize',generateMatrix);
 
 /* TERMINAL BOOT SEQUENCE */
 const bootLines=[
